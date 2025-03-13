@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sq's DSP Tweaks</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+    body {
+      font-family: Nunito, Arial, sans-serif;
+      color: #343a40;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+      background-color: #f8f9fa;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    a {
+      color: #339af0;
+    }
+    .pack-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      gap: 20px;
+    }
+    .addon-container {
+      display: flex;
+      align-items: center;
+      background: #f8f9fa;
+      border: #ced4da solid 2px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0;
+      width: 90%;
+    }
+    .label-container {
+      width: 100%;
+      padding-right: 20px;
+    }
+    .addon-label {
+      margin: 0 0 8px 0;
+      font-size: 1.2em;
+    }
+    .addon-description {
+      margin: 0;
+      color: #495057;
+      width: 50%;
+    }
+    .label-container {
+      flex: 0 1 300px;
+      min-width: 150px;
+    }
+    .image-container {
+      display: flex;
+      gap: 10px;
+      flex: 1;
+      justify-content: center;
+      margin-right: 20px;
+    }
+    .addon-image {
+      width: 80%;
+      object-fit: cover;
+      border-radius: 4px;
+      height: 100px;
+      min-width: 50px;
+    }
+    .select-button {
+      font-family: Nunito, Arial, sans-serif;
+      padding: 10px 20px;
+      background-color: #339af0;
+      color: #f8f9fa;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      flex: 0 0 100px;
+    }
+    .select-button:hover {
+      background-color: #228be6;
+    }
+    .image-with-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .image-label {
+      font-size: 0.9em;
+      color: #495057;
+}
+  </style>
+</head>
+<body>
+
+<h1>sq's Digs' Simple Pack Tweaks</h1>
+<h3>Download <a href="https://modrinth.com/resourcepack/digs-simple-pack">Digs' Simple Pack</a>! These tweaks are inspired by <a href="https://vanillatweaks.net/picker/resource-packs/">Vanilla Tweaks</a>.</h3>
+
+<!-- Nguhcraft Additions -->
+<div class="addon-container">
+  <div class="label-container">
+    <h3 class="addon-label">Nguhcraft Blocks</h3>
+    <p class="addon-description">Adds additional textures for the <a href="https://github.com/Agma-Schwa/Nguhcraft">Nguhcraft Mod</a>.</p>
+  </div>
+  <div class="image-container">
+    <div class="image-with-label">
+      <img class="addon-image" src="images/nguhcraft1.png" alt="Before">
+      <span class="image-label">Before</span>
+    </div>
+    <div class="image-with-label">
+      <img class="addon-image" src="images/nguhcraft2.png" alt="After">
+      <span class="image-label">After</span>
+    </div>
+  </div>
+  <button class="select-button" onclick="toggleSelection('nguhcraft', this)">Select</button>
+</div>
+<div id="selected-mods" style="margin-top: 20px; text-align: center;">
+  <p>Selected tweaks: <span id="selected-list">None</span></p>
+  <button class="select-button" onclick="downloadSelected()" style="margin-top: 10px;">Download Selected</button>
+</div>
+
+<script>
+  let selected = [];
+  
+  function toggleSelection(addonName, button) {
+    if (selected.includes(addonName)) {
+      selected = selected.filter(name => name !== addonName);
+      button.style.backgroundColor = '#339af0';
+      button.textContent = 'Select';
+    } else {
+      selected.push(addonName);
+      button.style.backgroundColor = '#51cf66';
+      button.textContent = 'Selected';
+    }
+    updateSelectedList();
+  }
+
+  function updateSelectedList() {
+    const listElement = document.getElementById('selected-list');
+    listElement.textContent = selected.length > 0 ? selected.join(', ') : 'None';
+  }
+
+  function downloadSelected() {
+    if (selected.length === 0) {
+      alert('Please select at least one tweak to download');
+      return;
+    }
+    console.log('Downloading:', selected);
+  }
+</script>
+
+</body>
+</html>
